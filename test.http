@@ -1,0 +1,3 @@
+
+###d
+GET http://any:3000/api/product/123d

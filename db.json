@@ -1,0 +1,183 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "user 1",
+      "lastName": "user 1",
+      "email": "user1@gmail.com",
+      "phone": "user 1 phone"
+    },
+    {
+      "firstName": "user 2",
+      "lastName": "user 2",
+      "email": "user2@gmail.com",
+      "phone": "user 2 phone",
+      "id": 2
+    },
+    {
+      "firstName": "user 2",
+      "lastName": "user 2",
+      "email": "user2@gmail.com",
+      "phone": "user 2 phone",
+      "id": 3
+    },
+    {
+      "firstName": "user 2",
+      "lastName": "user 2",
+      "email": "user2@gmail.com",
+      "phone": "user 2 phone",
+      "id": 6
+    },
+    {
+      "firstName": "user 2",
+      "lastName": "user 2",
+      "email": "user2@gmail.com",
+      "phone": "user 2 phone",
+      "id": 10
+    },
+    {
+      "firstName": "user 2",
+      "lastName": "user 2",
+      "email": "user2@gmail.com",
+      "phone": "user 2 phone",
+      "id": 11
+    },
+    {
+      "firstName": "user 2",
+      "lastName": "user 2",
+      "email": "user2@gmail.com",
+      "phone": "user 2 phone",
+      "id": 12
+    },
+    {
+      "firstName": "user 2",
+      "lastName": "user 2",
+      "email": "user2@gmail.com",
+      "phone": "user 2 phone",
+      "id": 13
+    }
+  ],
+  "shippings": [
+    {
+      "id": 1,
+      "name": "Next Express"
+    }
+  ],
+  "paymentMethods": [
+    {
+      "id": 1,
+      "name": "Master Card"
+    }
+  ],
+  "userPaymentMethods": [
+    {
+      "id": 1,
+      "cardholderName": "USER 1",
+      "cardNumber": "123123123123",
+      "userId": 1,
+      "paymentMethodId": 1
+    }
+  ],
+  "orderStatuses": [
+    {
+      "id": 1,
+      "name": "Delivered"
+    },
+    {
+      "id": 2,
+      "name": "Canceled"
+    },
+    {
+      "id": 3,
+      "name": "Transport"
+    },
+    {
+      "id": 4,
+      "name": "Pending"
+    }
+  ],
+  "brands": [
+    {
+      "id": 1,
+      "name": "Adidas"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Sneaker"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Adidas Sneaker vjp pro no1",
+      "description": "",
+      "quantity": 1,
+      "regularPrice": 999,
+      "salePrice": 888.4,
+      "sku": "#13BA2",
+      "brandId": 1,
+      "categoryId": 1
+    },
+    {
+      "id": 2,
+      "name": "Adidas Sneaker vjp pro no2",
+      "description": "",
+      "quantity": 1,
+      "regularPrice": 999,
+      "salePrice": 888.4,
+      "sku": "#13BA2",
+      "brandId": 1,
+      "categoryId": 1
+    }
+  ],
+  "productImages": [
+    {
+      "id": 1,
+      "imageURL": "this is image url 1",
+      "imageTitle": "this is image title 1",
+      "productId": 1
+    },
+    {
+      "id": 2,
+      "imageURL": "this is image url 1",
+      "imageTitle": "this is image title 1",
+      "productId": 1
+    },
+    {
+      "id": 3,
+      "imageURL": "this is image url 2",
+      "imageTitle": "this is image title 2",
+      "productId": 2
+    },
+    {
+      "id": 4,
+      "imageURL": "this is image url 2",
+      "imageTitle": "this is image title 2",
+      "productId": 2
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "orderStatusId": 1,
+      "shippingId": 1,
+      "userPaymentMethodId": 1,
+      "address": "193 NLB",
+      "note": "this is a dumb order"
+    }
+  ],
+  "orderProducts": [
+    {
+      "id": 0,
+      "orderId": 1,
+      "productId": 1
+    },
+    {
+      "id": 1,
+      "orderId": 1,
+      "productId": 2
+    }
+  ]
+}
