@@ -21,15 +21,15 @@ server.post("/api/user", (req, res) => {
 // get order details
 server.get("/api/order/:orderId", (req, res) => {
   const { orderId } = req.params;
-  const orderDTO: OrderDTO | undefined = db.get("orders").find(({ id }) => id === parseInt(orderId)).value();
+  const orderDTO: OrderDTO | undefined = db.get("orders").value().binarySearch((order) => [order.id, parseInt(orderId)]);
   if (orderDTO) {
-    const orderStatusDTO: OrderStatusDTO = db.get("orderStatuses").find(({ id }) => id === orderDTO.orderStatusId).value();
-    const shippingDTO: ShippingDTO = db.get("shippings").find(({ id }) => id === orderDTO.shippingId).value();
-    const userPaymentMethodDTO: UserPaymentMethodDTO = db.get("userPaymentMethods").find(({ id }) => id === orderDTO.shippingId).value();
-    const paymentMethodDTO: PaymentMethodDTO = db.get("paymentMethods").find(({ id }) => id === userPaymentMethodDTO.paymentMethodId).value();
-    const userDTO: UserDTO = db.get("users").find(({ id }) => id === userPaymentMethodDTO.userId).value();
-    const orderProductDTO: OrderProductDTO[] = db.get("orderProducts").filter(({ orderId }) => orderId === orderDTO.id).value();
-    const productDTOs: ProductDTO[] = db.get("products").filter(({ id }) => orderProductDTO.some(({ productId }) => id === productId)).value();
+    const orderStatusDTO: OrderStatusDTO = db.get("orderStatuses").value().binarySearch((orderStatus) => [orderStatus.id, orderDTO.orderStatusId])!;
+    const shippingDTO: ShippingDTO = db.get("shippings").value().binarySearch((shipping) => [shipping.id, orderDTO.shippingId])!;
+    const userPaymentMethodDTO: UserPaymentMethodDTO = db.get("userPaymentMethods").value().binarySearch((userPaymentMethod) => [userPaymentMethod.id, orderDTO.userPaymentMethodId])!;
+    const paymentMethodDTO: PaymentMethodDTO = db.get("paymentMethods").value().binarySearch((paymentMethod) => [paymentMethod.id, userPaymentMethodDTO.paymentMethodId])!;
+    const userDTO: UserDTO = db.get("users").value().binarySearch((user) => [user.id, userPaymentMethodDTO.userId])!;
+    const orderProductDTO: OrderProductDTO[] = db.get("orderProducts").value().filter(({ orderId }) => orderId === orderDTO.id)!;
+    const productDTOs: ProductDTO[] = orderProductDTO.map((orderProduct) => db.get("products").value().binarySearch((product) => [product.id, orderProduct.productId])!);
 
     const orderResponse: OrderType = {
       ...orderDTO,
