@@ -1,51 +1,73 @@
 import jsonServer from "json-server";
-import { DatabaseDTO, OrderDTO, OrderProductDTO, OrderStatusDTO, OrderType, PaymentMethodDTO, ProductDTO, ShippingDTO, UserDTO, UserPaymentMethodDTO } from "./types";
-import { generateId } from "./utils";
+import { DatabaseDTO, OrderType, ProductDTO, ProductType } from "./types";
+import { DB } from "./utils";
 
 const server = jsonServer.create();
 const router = jsonServer.router<DatabaseDTO>("db.json");
-const db = router.db
+const db = new DB(router);
 const middlewares = jsonServer.defaults();
 
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
 // add a new user
-server.post("/api/user", (req, res) => {
-  const newUser: UserDTO = req.body;
-  newUser.id = generateId(db.get("users").value())
-  db.get("users").push(newUser).write();
-  res.status(201).json(newUser)
-});
+// server.post("/api/user", (req, res) => {
+//   const newUser: UserDTO = req.body;
+//   newUser.id = generateId(db.get("users").value())
+//   db.get("users").push(newUser).write();
+//   res.status(201).json(newUser)
+// });
 
-// get order details
+// 8.1. Get an order
 server.get("/api/order/:orderId", (req, res) => {
   const { orderId } = req.params;
-  const orderDTO: OrderDTO | undefined = db.get("orders").value().binarySearch((order) => [order.id, parseInt(orderId)]);
-  if (orderDTO) {
-    const orderStatusDTO: OrderStatusDTO = db.get("orderStatuses").value().binarySearch((orderStatus) => [orderStatus.id, orderDTO.orderStatusId])!;
-    const shippingDTO: ShippingDTO = db.get("shippings").value().binarySearch((shipping) => [shipping.id, orderDTO.shippingId])!;
-    const userPaymentMethodDTO: UserPaymentMethodDTO = db.get("userPaymentMethods").value().binarySearch((userPaymentMethod) => [userPaymentMethod.id, orderDTO.userPaymentMethodId])!;
-    const paymentMethodDTO: PaymentMethodDTO = db.get("paymentMethods").value().binarySearch((paymentMethod) => [paymentMethod.id, userPaymentMethodDTO.paymentMethodId])!;
-    const userDTO: UserDTO = db.get("users").value().binarySearch((user) => [user.id, userPaymentMethodDTO.userId])!;
-    const orderProductDTO: OrderProductDTO[] = db.get("orderProducts").value().filter(({ orderId }) => orderId === orderDTO.id)!;
-    const productDTOs: ProductDTO[] = orderProductDTO.map((orderProduct) => db.get("products").value().binarySearch((product) => [product.id, orderProduct.productId])!);
-
-    const orderResponse: OrderType = {
-      ...orderDTO,
-      orderStatus: orderStatusDTO,
-      shipping: shippingDTO,
-      userPaymentMethod: {
-        ...userPaymentMethodDTO,
-        paymentMethod: paymentMethodDTO,
-        user: userDTO
-      },
-      products: productDTOs
-    };
-
+  const orderResponse: OrderType | undefined = db.getOrder(parseInt(orderId))
+  if (orderResponse) {
     res.json(orderResponse);
   }
 })
+
+// 8.2. Get all orders
+server.get("/api/orders", (req, res) => {
+  req;
+  const allOrdersResponse: OrderType[] = db.getOrders();
+  res.json(allOrdersResponse);
+})
+
+// 1.1. Get a single product
+server.get("/api/product/:productId", (req, res) => {
+  const { productId } = req.params;
+  const productResponse: ProductType | undefined = db.getProduct(parseInt(productId))
+  if (productResponse) {
+    res.json(productResponse)
+  }
+})
+
+// 1.2. Get all products
+server.get("/api/products", (req, res) => {
+  req;
+  const allProductResponse: ProductType[] | undefined = db.getProducts();
+  if (allProductResponse) {
+    res.json(allProductResponse);
+  }
+})
+
+// 1.2. Get all products by category
+server.get("/api/products/:categoryId", (req, res) => {
+  const { categoryId } = req.params
+  const allProductResponse: ProductType[] | undefined = db.getProducts(parseInt(categoryId));
+  if (allProductResponse) {
+    res.json(allProductResponse);
+  }
+})
+
+// 1.3. Add a product
+// 1.3.1. Add information of the product
+server.post("/api/product", (req, res) => {
+  const newProduct: ProductDTO = req.body;
+  res.status(201).json(db.addProduct(newProduct));
+})
+
 
 // Use default router -------------------------
 server.use("/api", router);

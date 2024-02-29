@@ -65,7 +65,7 @@
   ],
   "paymentMethods": [
     {
-      "id": 1,
+      "id": 0,
       "name": "Master Card"
     }
   ],
@@ -75,24 +75,24 @@
       "cardholderName": "USER 1",
       "cardNumber": "123123123123",
       "userId": 1,
-      "paymentMethodId": 1
+      "paymentMethodId": 0
     }
   ],
   "orderStatuses": [
     {
-      "id": 1,
+      "id": 0,
       "name": "Delivered"
     },
     {
-      "id": 2,
+      "id": 1,
       "name": "Canceled"
     },
     {
-      "id": 3,
+      "id": 2,
       "name": "Transport"
     },
     {
-      "id": 4,
+      "id": 3,
       "name": "Pending"
     }
   ],

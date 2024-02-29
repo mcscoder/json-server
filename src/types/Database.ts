@@ -61,6 +61,7 @@ export interface ProductImageDTO {
   id: number;
   imageURL: string;
   imageName: string;
+  productId: number;
 }
 export interface OrderDTO {
   id: number;
