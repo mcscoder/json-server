@@ -135,25 +135,25 @@
   "productImages": [
     {
       "id": 1,
-      "imageURL": "this is image url 1",
+      "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
       "imageTitle": "this is image title 1",
       "productId": 1
     },
     {
       "id": 2,
-      "imageURL": "this is image url 1",
+      "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
       "imageTitle": "this is image title 1",
       "productId": 1
     },
     {
       "id": 3,
-      "imageURL": "this is image url 2",
+      "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
       "imageTitle": "this is image title 2",
       "productId": 2
     },
     {
       "id": 4,
-      "imageURL": "this is image url 2",
+      "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
       "imageTitle": "this is image title 2",
       "productId": 2
     }
@@ -165,19 +165,23 @@
       "shippingId": 1,
       "userPaymentMethodId": 1,
       "address": "193 NLB",
-      "note": "this is a dumb order"
+      "note": "this is a dumb orderdfsdafsdfdfdfddfdfffffffffffffasdfasdfasdfasdf"
     }
   ],
   "orderProducts": [
     {
       "id": 0,
       "orderId": 1,
-      "productId": 1
+      "productId": 1,
+      "quantity": 3,
+      "price": 888.4
     },
     {
       "id": 1,
       "orderId": 1,
-      "productId": 2
+      "productId": 2,
+      "quantity": 1,
+      "price": 888.4
     }
   ]
 }

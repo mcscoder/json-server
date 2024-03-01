@@ -74,4 +74,6 @@ export interface OrderDTO {
 export interface OrderProductDTO {
   productId: number;
   orderId: number;
+  quantity: number;
+  price: number;
 }

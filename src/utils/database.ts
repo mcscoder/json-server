@@ -1,4 +1,4 @@
-import { BrandDTO, CategoryDTO, DatabaseDTO, OrderDTO, OrderProductDTO, OrderStatusDTO, OrderType, PaymentMethodDTO, ProductDTO, ProductImageDTO, ProductType, ShippingDTO, UserDTO, UserPaymentMethodDTO } from "@/types";
+import { BrandDTO, CategoryDTO, DatabaseDTO, OrderDTO, OrderProductType, OrderStatusDTO, OrderType, PaymentMethodDTO, ProductDTO, ProductImageDTO, ProductType, ShippingDTO, UserDTO, UserPaymentMethodDTO } from "@/types";
 import { JsonServerRouter } from "json-server"
 import { LowdbSync } from "lowdb"
 import { generateId } from "./common";
@@ -60,8 +60,12 @@ export class DB {
       const userPaymentMethodDTO: UserPaymentMethodDTO = this.db.get("userPaymentMethods").value().binarySearch((userPaymentMethod) => [userPaymentMethod.id, orderDTO.userPaymentMethodId])!;
       const paymentMethodDTO: PaymentMethodDTO = this.db.get("paymentMethods").value().binarySearch((paymentMethod) => [paymentMethod.id, userPaymentMethodDTO.paymentMethodId])!;
       const userDTO: UserDTO = this.db.get("users").value().binarySearch((user) => [user.id, userPaymentMethodDTO.userId])!;
-      const orderProductDTO: OrderProductDTO[] = this.db.get("orderProducts").value().filter(({ orderId }) => orderId === orderDTO.id)!;
-      const productDTOs: ProductDTO[] = orderProductDTO.map((orderProduct) => this.db.get("products").value().binarySearch((product) => [product.id, orderProduct.productId])!);
+      const orderProducts: OrderProductType[] = []
+      this.db.get("orderProducts").value().forEach((orderProduct) => {
+        if (orderProduct.orderId === orderDTO.id) {
+          orderProducts.push({ ...orderProduct, product: this.getProduct(orderProduct.productId)! })
+        }
+      })
 
       const orderResponse: OrderType = {
         ...orderDTO,
@@ -72,7 +76,7 @@ export class DB {
           paymentMethod: paymentMethodDTO,
           user: userDTO
         },
-        products: productDTOs
+        orderProducts
       };
 
       return orderResponse;
