@@ -54,6 +54,7 @@ export interface ProductDTO {
   regularPrice: number;
   salePrice: number;
   sku: string;
+  sales: number;
   brandId: number;
   categoryId: number;
 }

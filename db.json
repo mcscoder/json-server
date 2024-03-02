@@ -106,30 +106,60 @@
     {
       "id": 1,
       "name": "Sneaker"
+    },
+    {
+      "id": 2,
+      "name": "Gigachad"
     }
   ],
   "products": [
     {
       "id": 1,
       "name": "Adidas Sneaker vjp pro no1",
-      "description": "",
-      "quantity": 1,
+      "description": "Yasuo 1v5 pentakill with kda 0/11/2 after his teammates call him is idiot yasuo",
+      "quantity": 123,
       "regularPrice": 999,
       "salePrice": 888.4,
       "sku": "#13BA2",
+      "sales": 213,
       "brandId": 1,
       "categoryId": 1
     },
     {
       "id": 2,
       "name": "Adidas Sneaker vjp pro no2",
-      "description": "",
-      "quantity": 1,
+      "description": "Yasuo 1v5 pentakill with kda 0/11/2 after his teammates call him is idiot yasuo",
+      "quantity": 33,
       "regularPrice": 999,
       "salePrice": 888.4,
       "sku": "#13BA2",
+      "sales": 320,
       "brandId": 1,
       "categoryId": 1
+    },
+    {
+      "id": 3,
+      "name": "Adidas Sneaker vjp pro no1",
+      "description": "Yasuo 1v5 pentakill with kda 0/11/2 after his teammates call him is idiot yasuo",
+      "quantity": 123,
+      "regularPrice": 999,
+      "salePrice": 888.4,
+      "sku": "#13BA2",
+      "sales": 213,
+      "brandId": 1,
+      "categoryId": 2
+    },
+    {
+      "id": 4,
+      "name": "Adidas Sneaker vjp pro no2",
+      "description": "Yasuo 1v5 pentakill with kda 0/11/2 after his teammates call him is idiot yasuo",
+      "quantity": 33,
+      "regularPrice": 999,
+      "salePrice": 888.4,
+      "sku": "#13BA2",
+      "sales": 320,
+      "brandId": 1,
+      "categoryId": 2
     }
   ],
   "productImages": [
@@ -156,16 +186,28 @@
       "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
       "imageTitle": "this is image title 2",
       "productId": 2
+    },
+    {
+      "id": 5,
+      "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
+      "imageTitle": "this is image title 2",
+      "productId": 3
+    },
+    {
+      "id": 6,
+      "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
+      "imageTitle": "this is image title 2",
+      "productId": 4
     }
   ],
   "orders": [
     {
       "id": 1,
-      "orderStatusId": 1,
+      "orderStatusId": 3,
       "shippingId": 1,
       "userPaymentMethodId": 1,
       "address": "193 NLB",
-      "note": "this is a dumb orderdfsdafsdfdfdfddfdfffffffffffffasdfasdfasdfasdf"
+      "note": "this is a dumb order i've ever seen, this guy has 1.6 million of lee sin mastery"
     }
   ],
   "orderProducts": [

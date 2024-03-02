@@ -1,5 +1,5 @@
 import jsonServer from "json-server";
-import { DatabaseDTO, OrderType, ProductDTO, ProductType } from "./types";
+import { CategoryWithQuantityType, DatabaseDTO, OrderType, ProductDTO, ProductType } from "./types";
 import { DB } from "./utils";
 
 const server = jsonServer.create();
@@ -66,6 +66,22 @@ server.get("/api/products/:categoryId", (req, res) => {
 server.post("/api/product", (req, res) => {
   const newProduct: ProductDTO = req.body;
   res.status(201).json(db.addProduct(newProduct));
+})
+
+// 2.1. Get a category
+server.get("/api/category/:categoryId", (req, res) => {
+  const { categoryId } = req.params
+  const categoryResponse: CategoryWithQuantityType | undefined = db.getCategory(parseInt(categoryId))
+  if (categoryResponse) {
+    res.json(categoryResponse)
+  }
+})
+
+// 2.2. Get all categories
+server.get("/api/categories", (req, res) => {
+  req;
+  const categoriesResponse: CategoryWithQuantityType[] = db.getCategories()
+  res.json(categoriesResponse)
 })
 
 

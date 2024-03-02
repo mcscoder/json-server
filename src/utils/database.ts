@@ -1,4 +1,4 @@
-import { BrandDTO, CategoryDTO, DatabaseDTO, OrderDTO, OrderProductType, OrderStatusDTO, OrderType, PaymentMethodDTO, ProductDTO, ProductImageDTO, ProductType, ShippingDTO, UserDTO, UserPaymentMethodDTO } from "@/types";
+import { BrandDTO, CategoryDTO, CategoryWithQuantityType, DatabaseDTO, OrderDTO, OrderProductType, OrderStatusDTO, OrderType, PaymentMethodDTO, ProductDTO, ProductImageDTO, ProductType, ShippingDTO, UserDTO, UserPaymentMethodDTO } from "@/types";
 import { JsonServerRouter } from "json-server"
 import { LowdbSync } from "lowdb"
 import { generateId } from "./common";
@@ -49,6 +49,32 @@ export class DB {
     newProduct.id = generateId(this.db.get("products").value());
     this.db.get("products").push(newProduct).write();
     return newProduct
+  }
+
+  // 2.1. Get a category
+  getCategory(categoryId: number): CategoryWithQuantityType | undefined {
+    const category: CategoryDTO | undefined = this.db.get("categories").value().binarySearch((category) => [category.id, categoryId])
+    if (category) {
+      const quantity: number = this.db.get("products").value().reduce((quantity, product) => {
+        if (product.categoryId === category.id) quantity += product.quantity
+        return quantity
+      }, 0)
+      const categoryResponse: CategoryWithQuantityType = {
+        ...category,
+        quantity
+      }
+      return categoryResponse;
+    }
+    return undefined;
+  }
+
+  // 2.2. Get all categories
+  getCategories(): CategoryWithQuantityType[] {
+    const categories: CategoryDTO[] = this.db.get("categories").value();
+    const categoriesResponse: CategoryWithQuantityType[] = categories.map(({ id: categoryId }) => {
+      return this.getCategory(categoryId)!
+    })
+    return categoriesResponse;
   }
 
   // 8.1. Get a order details

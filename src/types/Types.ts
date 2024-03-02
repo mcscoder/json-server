@@ -12,7 +12,7 @@ export type OrderType = Pick<OrderDTO, "id" | "note" | "address"> & {
   orderProducts: OrderProductType[];
 }
 
-export type ProductType = Pick<ProductDTO, "id" | "name" | "description" | "quantity" | "regularPrice" | "salePrice" | "sku"> & {
+export type ProductType = Pick<ProductDTO, "id" | "name" | "description" | "quantity" | "regularPrice" | "salePrice" | "sku" | "sales"> & {
   brand: BrandDTO;
   category: CategoryDTO;
   productImages: Pick<ProductImageDTO, "id" | "imageName" | "imageURL">[]
@@ -20,4 +20,8 @@ export type ProductType = Pick<ProductDTO, "id" | "name" | "description" | "quan
 
 export type OrderProductType = OrderProductDTO & {
   product: ProductType;
+}
+
+export type CategoryWithQuantityType = CategoryDTO & {
+  quantity: number
 }
