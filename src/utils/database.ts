@@ -111,8 +111,13 @@ export class DB {
   }
 
   // 8.2. Get all orders
-  getOrders(): OrderType[] {
-    const orders: OrderDTO[] = this.db.get("orders").value();
+  getOrders(statusId: number | undefined = undefined): OrderType[] {
+    let orders: OrderDTO[];
+    if (!statusId) {
+      orders = this.db.get("orders").value()
+    } else {
+      orders = this.db.get("orders").value().filter((order) => order.orderStatusId === statusId)
+    }
     const allOrdersResponse: OrderType[] = orders.map((order) => this.getOrder(order.id)!)
     return allOrdersResponse
   }

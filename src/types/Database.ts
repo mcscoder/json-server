@@ -18,6 +18,7 @@ export interface UserDTO {
   lastName: string;
   email: string;
   phone: string;
+  avatar: string;
 }
 export interface ShippingDTO {
   id: number;

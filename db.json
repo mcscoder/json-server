@@ -5,56 +5,8 @@
       "firstName": "user 1",
       "lastName": "user 1",
       "email": "user1@gmail.com",
-      "phone": "user 1 phone"
-    },
-    {
-      "firstName": "user 2",
-      "lastName": "user 2",
-      "email": "user2@gmail.com",
-      "phone": "user 2 phone",
-      "id": 2
-    },
-    {
-      "firstName": "user 2",
-      "lastName": "user 2",
-      "email": "user2@gmail.com",
-      "phone": "user 2 phone",
-      "id": 3
-    },
-    {
-      "firstName": "user 2",
-      "lastName": "user 2",
-      "email": "user2@gmail.com",
-      "phone": "user 2 phone",
-      "id": 6
-    },
-    {
-      "firstName": "user 2",
-      "lastName": "user 2",
-      "email": "user2@gmail.com",
-      "phone": "user 2 phone",
-      "id": 10
-    },
-    {
-      "firstName": "user 2",
-      "lastName": "user 2",
-      "email": "user2@gmail.com",
-      "phone": "user 2 phone",
-      "id": 11
-    },
-    {
-      "firstName": "user 2",
-      "lastName": "user 2",
-      "email": "user2@gmail.com",
-      "phone": "user 2 phone",
-      "id": 12
-    },
-    {
-      "firstName": "user 2",
-      "lastName": "user 2",
-      "email": "user2@gmail.com",
-      "phone": "user 2 phone",
-      "id": 13
+      "phone": "user 1 phone",
+      "avatar": "https://dudeproducts.com/cdn/shop/articles/gigachad_1068x.jpg?v=1667928905"
     }
   ],
   "shippings": [
@@ -203,11 +155,11 @@
   "orders": [
     {
       "id": 1,
-      "orderStatusId": 3,
+      "orderStatusId": 0,
       "shippingId": 1,
       "userPaymentMethodId": 1,
       "address": "193 NLB",
-      "note": "this is a dumb order i've ever seen, this guy has 1.6 million of lee sin mastery"
+      "note": "this is a dumb order i've ever seen, this guy has 1.6 million of lee sin masterydfdfdf"
     }
   ],
   "orderProducts": [

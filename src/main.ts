@@ -1,6 +1,8 @@
 import jsonServer from "json-server";
 import { CategoryWithQuantityType, DatabaseDTO, OrderType, ProductDTO, ProductType } from "./types";
 import { DB } from "./utils";
+import express from "express"
+import path from "path"
 
 const server = jsonServer.create();
 const router = jsonServer.router<DatabaseDTO>("db.json");
@@ -9,6 +11,7 @@ const middlewares = jsonServer.defaults();
 
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
+server.use(express.static(path.join(__dirname, '../public/images')))
 
 // add a new user
 // server.post("/api/user", (req, res) => {
@@ -33,6 +36,14 @@ server.get("/api/orders", (req, res) => {
   const allOrdersResponse: OrderType[] = db.getOrders();
   res.json(allOrdersResponse);
 })
+
+// 8.3. Get all order by status
+server.get("/api/orders/:statusId", (req, res) => {
+  const { statusId } = req.params
+  const allOrdersResponse: OrderType[] = db.getOrders(parseInt(statusId));
+  res.json(allOrdersResponse);
+})
+
 
 // 1.1. Get a single product
 server.get("/api/product/:productId", (req, res) => {
