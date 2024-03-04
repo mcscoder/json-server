@@ -118,48 +118,48 @@
     {
       "id": 1,
       "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
-      "imageTitle": "this is image title 1",
+      "imageName": "this is image title 1.1",
       "productId": 1
     },
     {
       "id": 2,
       "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
-      "imageTitle": "this is image title 1",
+      "imageName": "this is image title 1.2",
       "productId": 1
     },
     {
       "id": 3,
       "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
-      "imageTitle": "this is image title 2",
+      "imageName": "this is image title 2.1",
       "productId": 2
     },
     {
       "id": 4,
       "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
-      "imageTitle": "this is image title 2",
+      "imageName": "this is image title 2.2",
       "productId": 2
     },
     {
       "id": 5,
       "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
-      "imageTitle": "this is image title 2",
+      "imageName": "this is image title 2",
       "productId": 3
     },
     {
       "id": 6,
       "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
-      "imageTitle": "this is image title 2",
+      "imageName": "this is image title 2",
       "productId": 4
     }
   ],
   "orders": [
     {
       "id": 1,
-      "orderStatusId": 0,
+      "orderStatusId": 1,
       "shippingId": 1,
       "userPaymentMethodId": 1,
       "address": "193 NLB",
-      "note": "this is a dumb order i've ever seen, this guy has 1.6 million of lee sin masterydfdfdf"
+      "note": "this is a dumb order i've ever seen, this guy has 1.6 million of lee sin masterydfdfdfdfdfdfdfdfdf"
     }
   ],
   "orderProducts": [

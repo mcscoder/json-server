@@ -113,7 +113,7 @@ export class DB {
   // 8.2. Get all orders
   getOrders(statusId: number | undefined = undefined): OrderType[] {
     let orders: OrderDTO[];
-    if (!statusId) {
+    if (statusId === undefined) {
       orders = this.db.get("orders").value()
     } else {
       orders = this.db.get("orders").value().filter((order) => order.orderStatusId === statusId)
