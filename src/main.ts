@@ -3,15 +3,19 @@ import { CategoryWithQuantityType, DatabaseDTO, OrderType, ProductDTO, ProductTy
 import { DB } from "./utils";
 import express from "express"
 import path from "path"
+import multer from "multer";
 
 const server = jsonServer.create();
 const router = jsonServer.router<DatabaseDTO>("db.json");
 const db = new DB(router);
 const middlewares = jsonServer.defaults();
+const commonPath = {
+  publicImage: path.join(__dirname, '../public/images'),
+}
 
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
-server.use(express.static(path.join(__dirname, '../public/images')))
+server.use("/api/public/images", express.static(commonPath.publicImage))
 
 // add a new user
 // server.post("/api/user", (req, res) => {
@@ -78,6 +82,38 @@ server.post("/api/product", (req, res) => {
   const newProduct: ProductDTO = req.body;
   res.status(201).json(db.addProduct(newProduct));
 })
+
+// 1.5. Update product
+// 1.5.1. Update product images
+// 1.5.1.1. Delete product images
+server.delete("/api/product-images", (req, res) => {
+  const productImageIds: number[] = req.body;
+  db.deleteProductImages(productImageIds)
+  res.json("ok")
+})
+// 1.5.1.2. Upload new images
+// Set up multer to handle file uploads
+const storage = multer.diskStorage({
+  destination: commonPath.publicImage,
+  filename: function (req, file, cb) {
+    req;
+    cb(null, Date.now() + "-" + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+// Handle POST request to /upload
+server.post("/api/upload/product-image/:productId", upload.array("files", 10), (req, res) => {
+  const { productId } = req.params
+  const fileList = req.files as Express.Multer.File[]
+  if (fileList) {
+    db.uploadProductImages(parseInt(productId), fileList)
+  }
+
+  // File has been uploaded successfully
+  res.json({ message: "File uploaded successfully" });
+});
 
 // 2.1. Get a category
 server.get("/api/category/:categoryId", (req, res) => {

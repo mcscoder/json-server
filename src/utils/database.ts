@@ -51,6 +51,27 @@ export class DB {
     return newProduct
   }
 
+  // 1.5. Update product
+  // 1.5.1. Update product images
+  deleteProductImages(productImageIds: number[]): void {
+    // we can use recursive to prevent re-write file too much
+    productImageIds.forEach((id) => {
+      this.db.get("productImages").remove({ id }).write();
+    })
+  }
+  // 1.5.2. Upload new images
+  uploadProductImages(productId: number, fileList: Express.Multer.File[]) {
+    fileList.forEach((file) => {
+      const productImage: ProductImageDTO = {
+        id: generateId(this.db.get("productImages").value()),
+        imageName: file.originalname,
+        imageURL: `/api/public/images/${file.filename}`,
+        productId
+      }
+      this.db.get("productImages").push(productImage).write();
+    })
+  }
+
   // 2.1. Get a category
   getCategory(categoryId: number): CategoryWithQuantityType | undefined {
     const category: CategoryDTO | undefined = this.db.get("categories").value().binarySearch((category) => [category.id, categoryId])

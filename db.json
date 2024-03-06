@@ -72,7 +72,7 @@
       "quantity": 123,
       "regularPrice": 999,
       "salePrice": 888.4,
-      "sku": "#13BA2",
+      "sku": "123123#3asdfasdfasbddd",
       "sales": 213,
       "brandId": 1,
       "categoryId": 1
@@ -91,7 +91,7 @@
     },
     {
       "id": 3,
-      "name": "Adidas Sneaker vjp pro no1",
+      "name": "Adidas Sneaker vjp pro no1 qua vjp pro",
       "description": "Yasuo 1v5 pentakill with kda 0/11/2 after his teammates call him is idiot yasuo",
       "quantity": 123,
       "regularPrice": 999,
@@ -99,7 +99,7 @@
       "sku": "#13BA2",
       "sales": 213,
       "brandId": 1,
-      "categoryId": 2
+      "categoryId": 1
     },
     {
       "id": 4,
@@ -141,7 +141,7 @@
     },
     {
       "id": 5,
-      "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
+      "imageURL": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/LeeSin_10.jpg",
       "imageName": "this is image title 2",
       "productId": 3
     },
@@ -155,11 +155,11 @@
   "orders": [
     {
       "id": 1,
-      "orderStatusId": 1,
+      "orderStatusId": 2,
       "shippingId": 1,
       "userPaymentMethodId": 1,
       "address": "193 NLB",
-      "note": "this is a dumb order i've ever seen, this guy has 1.6 million of lee sin masterydfdfdfdfdfdfdfdfdf"
+      "note": "this is a dumb order i've ever seen, this guy has 1.6 million of lee sin mcs dep trai vcl"
     }
   ],
   "orderProducts": [
