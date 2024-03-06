@@ -58,6 +58,7 @@ export interface ProductDTO {
   sales: number;
   brandId: number;
   categoryId: number;
+  isDeprecated: boolean | undefined;
 }
 export interface ProductImageDTO {
   id: number;

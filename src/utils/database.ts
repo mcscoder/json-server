@@ -32,12 +32,12 @@ export class DB {
   getProducts(categoryId: number | undefined = undefined): ProductType[] | undefined {
     let products: ProductDTO[] | undefined
     if (categoryId) {
-      products = this.db.get("products").value().filter((product) => product.categoryId === categoryId);
+      products = this.db.get("products").value().filter((product) => product.categoryId === categoryId && !product.isDeprecated);
       if (!products) {
         return undefined
       }
     } else {
-      products = this.db.get("products").value();
+      products = this.db.get("products").value().filter((product) => !product.isDeprecated);
     }
     const allProductsResponse: ProductType[] = products.map(({ id }) => this.getProduct(id)!);
     return allProductsResponse;
@@ -51,13 +51,26 @@ export class DB {
     return newProduct
   }
 
+  // 1.4. Deprecated a product
+  deprecatedProduct(productId: number): void {
+    const product = this.db.get("products")
+      .value().binarySearch(({ id }) => [id, productId])!;
+    if (product.isDeprecated) {
+      product.isDeprecated = false
+    } else {
+      product.isDeprecated = true
+    }
+    this.db.write();
+  }
+
   // 1.5. Update product
   // 1.5.1. Update product images
   deleteProductImages(productImageIds: number[]): void {
-    // we can use recursive to prevent re-write file too much
+    let productImages = this.db.get("productImages")
     productImageIds.forEach((id) => {
-      this.db.get("productImages").remove({ id }).write();
+      productImages = productImages.remove({ id });
     })
+    productImages.write();
   }
   // 1.5.2. Upload new images
   uploadProductImages(productId: number, fileList: Express.Multer.File[]) {
@@ -77,7 +90,7 @@ export class DB {
     const category: CategoryDTO | undefined = this.db.get("categories").value().binarySearch((category) => [category.id, categoryId])
     if (category) {
       const quantity: number = this.db.get("products").value().reduce((quantity, product) => {
-        if (product.categoryId === category.id) quantity += product.quantity
+        if (product.categoryId === category.id && !product.isDeprecated) quantity++;
         return quantity
       }, 0)
       const categoryResponse: CategoryWithQuantityType = {

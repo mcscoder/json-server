@@ -83,6 +83,13 @@ server.post("/api/product", (req, res) => {
   res.status(201).json(db.addProduct(newProduct));
 })
 
+// 1.4.1. Deprecated a product
+server.patch("/api/product/:productId", (req, res) => {
+  const { productId } = req.params
+  db.deprecatedProduct(parseInt(productId))
+  res.jsonp("ok")
+})
+
 // 1.5. Update product
 // 1.5.1. Update product images
 // 1.5.1.1. Delete product images

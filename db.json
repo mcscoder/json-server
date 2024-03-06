@@ -75,7 +75,8 @@
       "sku": "123123#3asdfasdfasbddd",
       "sales": 213,
       "brandId": 1,
-      "categoryId": 1
+      "categoryId": 1,
+      "isDeprecated": true
     },
     {
       "id": 2,
@@ -99,7 +100,8 @@
       "sku": "#13BA2",
       "sales": 213,
       "brandId": 1,
-      "categoryId": 1
+      "categoryId": 1,
+      "isDeprecated": true
     },
     {
       "id": 4,
@@ -111,7 +113,8 @@
       "sku": "#13BA2",
       "sales": 320,
       "brandId": 1,
-      "categoryId": 2
+      "categoryId": 2,
+      "isDeprecated": true
     }
   ],
   "productImages": [
@@ -119,12 +122,6 @@
       "id": 1,
       "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
       "imageName": "this is image title 1.1",
-      "productId": 1
-    },
-    {
-      "id": 2,
-      "imageURL": "https://www.mobafire.com/images/champion/square/yasuo.png",
-      "imageName": "this is image title 1.2",
       "productId": 1
     },
     {
