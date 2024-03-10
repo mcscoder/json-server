@@ -1,4 +1,5 @@
 export interface DatabaseDTO {
+  admins: AdminDTO[];
   users: UserDTO[];
   shippings: ShippingDTO[];
   paymentMethods: PaymentMethodDTO[];
@@ -10,6 +11,14 @@ export interface DatabaseDTO {
   productImages: ProductImageDTO[];
   orders: OrderDTO[];
   orderProducts: OrderProductDTO[];
+}
+
+export interface AdminDTO {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
 }
 
 export interface UserDTO {

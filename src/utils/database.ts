@@ -1,4 +1,4 @@
-import { BrandDTO, CategoryDTO, CategoryWithQuantityType, DatabaseDTO, OrderDTO, OrderProductType, OrderStatusDTO, OrderType, PaymentMethodDTO, ProductDTO, ProductImageDTO, ProductType, ShippingDTO, UserDTO, UserPaymentMethodDTO } from "@/types";
+import { AdminDTO, BrandDTO, CategoryDTO, CategoryWithQuantityType, DatabaseDTO, OrderDTO, OrderProductType, OrderStatusDTO, OrderType, PaymentMethodDTO, ProductDTO, ProductImageDTO, ProductType, ShippingDTO, UserDTO, UserPaymentMethodDTO } from "@/types";
 import { JsonServerRouter } from "json-server"
 import { LowdbSync } from "lowdb"
 import { generateId } from "./common";
@@ -29,14 +29,19 @@ export class DB {
   }
 
   // 1.2. Get all products
-  getProducts(categoryId: number | undefined = undefined): ProductType[] | undefined {
+  getProducts(categoryId: number | undefined = undefined, search: string | undefined = undefined): ProductType[] | undefined {
     let products: ProductDTO[] | undefined
     if (categoryId) {
       products = this.db.get("products").value().filter((product) => product.categoryId === categoryId && !product.isDeprecated);
       if (!products) {
         return undefined
       }
-    } else {
+    }
+    else if (search) {
+      const keyword = search.toLowerCase();
+      products = this.db.get("products").value().filter((product) => product.name.toLowerCase().includes(keyword) && !product.isDeprecated)
+    }
+    else {
       products = this.db.get("products").value().filter((product) => !product.isDeprecated);
     }
     const allProductsResponse: ProductType[] = products.map(({ id }) => this.getProduct(id)!);
@@ -154,5 +159,10 @@ export class DB {
     }
     const allOrdersResponse: OrderType[] = orders.map((order) => this.getOrder(order.id)!)
     return allOrdersResponse
+  }
+
+  // 9.1. Admin authentication
+  adminAuthentication(admin: AdminDTO): AdminDTO | undefined {
+    return this.db.get("admins").value().find(({ email, password }) => email === admin.email && password === admin.password)
   }
 }

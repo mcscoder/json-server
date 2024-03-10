@@ -1,5 +1,5 @@
 import jsonServer from "json-server";
-import { CategoryWithQuantityType, DatabaseDTO, OrderType, ProductDTO, ProductType } from "./types";
+import { AdminDTO, CategoryWithQuantityType, DatabaseDTO, OrderType, ProductDTO, ProductType } from "./types";
 import { DB } from "./utils";
 import express from "express"
 import path from "path"
@@ -60,8 +60,8 @@ server.get("/api/product/:productId", (req, res) => {
 
 // 1.2. Get all products
 server.get("/api/products", (req, res) => {
-  req;
-  const allProductResponse: ProductType[] | undefined = db.getProducts();
+  const search = req.query.search as string | undefined
+  const allProductResponse: ProductType[] | undefined = db.getProducts(undefined, search);
   if (allProductResponse) {
     res.json(allProductResponse);
   }
@@ -136,6 +136,18 @@ server.get("/api/categories", (req, res) => {
   req;
   const categoriesResponse: CategoryWithQuantityType[] = db.getCategories()
   res.json(categoriesResponse)
+})
+
+// 9.1. Admin authentication
+server.post("/api/admin-authentication", (req, res) => {
+  const admin: AdminDTO = req.body;
+  const adminResponse = db.adminAuthentication(admin);
+  if (adminResponse) {
+    res.status(200).json(adminResponse);
+  } else {
+    res.status(401).json({ message: "Login failed" });
+  };
+
 })
 
 

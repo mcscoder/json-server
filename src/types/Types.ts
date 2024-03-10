@@ -25,3 +25,7 @@ export type OrderProductType = OrderProductDTO & {
 export type CategoryWithQuantityType = CategoryDTO & {
   quantity: number
 }
+
+export interface Message {
+  message: string;
+}

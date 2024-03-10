@@ -1,4 +1,20 @@
 {
+  "admins": [
+    {
+      "id": 1,
+      "firstName": "Son",
+      "lastName": "mai",
+      "email": "sonmai@gmail.com",
+      "password": "mcs"
+    },
+    {
+      "firstName": "mc",
+      "lastName": "mcs",
+      "email": "mcs",
+      "password": "mcs",
+      "id": 2
+    }
+  ],
   "users": [
     {
       "id": 1,
@@ -156,7 +172,7 @@
     {
       "name": "M1A2 Abrams",
       "description": "The Tank, Combat, Full Tracked, 120-mm Gun M1A2 (shortened to M1A2 Abrams) is a rank VIII American medium tank with a battle rating of 11.7 (AB/RB/SB). It was introduced in Update 1.93 \"Shark Attack\" as the top researchable vehicle in the US Ground Forces tech tree. The M1A2 introduces heavy depleted uranium armour and a commander's thermal sight. ",
-      "quantity": 500,
+      "quantity": 580,
       "regularPrice": 1080000,
       "salePrice": 0,
       "sku": "#usa",
@@ -357,7 +373,7 @@
   "orders": [
     {
       "id": 1,
-      "orderStatusId": 2,
+      "orderStatusId": 0,
       "shippingId": 1,
       "userPaymentMethodId": 1,
       "address": "193 NLB",
