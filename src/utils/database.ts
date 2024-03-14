@@ -1,4 +1,4 @@
-import { AdminDTO, BrandDTO, CategoryDTO, CategoryWithQuantityType, DatabaseDTO, OrderDTO, OrderProductType, OrderStatusDTO, OrderType, PaymentMethodDTO, ProductDTO, ProductImageDTO, ProductType, ShippingDTO, UserDTO, UserPaymentMethodDTO } from "@/types";
+import { AdminDTO, BrandDTO, CategoryDTO, CategoryWithQuantityType, DatabaseDTO, OrderDTO, OrderProductDTO, OrderProductType, OrderStatusDTO, OrderType, PaymentMethodDTO, ProductDTO, ProductImageDTO, ProductType, ShippingDTO, UserDTO, UserPaymentMethodDTO } from "@/types";
 import { JsonServerRouter } from "json-server"
 import { LowdbSync } from "lowdb"
 import { generateId } from "./common";
@@ -158,7 +158,20 @@ export class DB {
       orders = this.db.get("orders").value().filter((order) => order.orderStatusId === statusId)
     }
     const allOrdersResponse: OrderType[] = orders.map((order) => this.getOrder(order.id)!)
-    return allOrdersResponse
+    return allOrdersResponse.reverse()
+  }
+
+  // 8.3.
+  // 8.3.1. Add an order
+  addOrder(order: OrderDTO): OrderDTO {
+    order.id = generateId(this.db.get("orders").value())
+    this.db.get("orders").push(order).write();
+    return order;
+  }
+  // 8.3.2. Add ordered products
+  addOrderedProducts(orderedProducts: OrderProductDTO[]): OrderProductDTO[] {
+    this.db.get("orderProducts").push(...orderedProducts).write();
+    return orderedProducts;
   }
 
   // 9.1. Admin authentication

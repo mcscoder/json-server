@@ -1,5 +1,5 @@
 import jsonServer from "json-server";
-import { AdminDTO, CategoryWithQuantityType, DatabaseDTO, OrderType, ProductDTO, ProductType } from "./types";
+import { AdminDTO, CategoryWithQuantityType, DatabaseDTO, OrderDTO, OrderProductDTO, OrderType, ProductDTO, ProductType } from "./types";
 import { DB } from "./utils";
 import express from "express"
 import path from "path"
@@ -46,6 +46,19 @@ server.get("/api/orders/:statusId", (req, res) => {
   const { statusId } = req.params
   const allOrdersResponse: OrderType[] = db.getOrders(parseInt(statusId));
   res.json(allOrdersResponse);
+})
+
+// 8.4. Add an order
+// 8.4.1. Add order
+server.post("/api/order", (req, res) => {
+  req.body.createdAt = Date.now();
+  const order: OrderDTO = req.body;
+  res.status(201).json(db.addOrder(order));
+})
+// 8.4.2. Add ordered product
+server.post("/api/order/products", (req, res) => {
+  const orderedProducts: OrderProductDTO[] = req.body;
+  res.status(201).json(db.addOrderedProducts(orderedProducts));
 })
 
 
