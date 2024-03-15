@@ -90,6 +90,13 @@ export class DB {
     })
   }
 
+  // 1.6. Get best seller products
+  getBestSellerProduct() {
+    const products = this.getProducts();
+    products?.sort((a, b) => b.sales - a.sales);
+    return products?.slice(0, 3);
+  }
+
   // 2.1. Get a category
   getCategory(categoryId: number): CategoryWithQuantityType | undefined {
     const category: CategoryDTO | undefined = this.db.get("categories").value().binarySearch((category) => [category.id, categoryId])

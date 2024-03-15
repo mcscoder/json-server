@@ -135,6 +135,13 @@ server.post("/api/upload/product-image/:productId", upload.array("files", 10), (
   res.json({ message: "File uploaded successfully" });
 });
 
+// 1.6. Get best seller products
+server.get("/api/products-best-sellers", (req, res) => {
+  req;
+  res.json(db.getBestSellerProduct())
+})
+
+
 // 2.1. Get a category
 server.get("/api/category/:categoryId", (req, res) => {
   const { categoryId } = req.params
